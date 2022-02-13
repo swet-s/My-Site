@@ -51,13 +51,16 @@ label {
   box-shadow: 5px 5px 10px black;
 }
 
-
-.ftr {
+.footer {
   background-color: #222;
   border-radius: 4px;
   color: white;
   padding-top: 15px;
   padding-bottom: 5px;
-  text-shadow: 5px;
   text-transform: uppercase;
+}
+
+.paragraph {
+  margin: 20px;
+  font-family: 'Montserrat', sans-serif;
 }
