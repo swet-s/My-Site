@@ -1,7 +1,13 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const request = require("request");
+const mongoose = require("mongoose");
 const https = require("https");
+
+
+const codeforces = require(__dirname + "/public/scripts/codeforces.js")
+
+
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
@@ -16,6 +22,31 @@ app.use(bodyparser.urlencoded({
 }));
 
 
+mongoose.connect("mongodb://localhost:27017/myDB", {
+  useNewUrlParser: true
+});
+
+const itemsSchema = {
+  name: String
+}
+const Item = mongoose.model("Item", itemsSchema);
+
+const beluga = new Item({
+  name: "Beluga"
+})
+const hecker = new Item({
+  name: "Hecker"
+})
+const skittle = new Item({
+  name: "Skittle"
+})
+
+// Item.insertMany([beluga, hecker, skittle], function(err){
+//   if (err) console.log(err);
+//   else console.log("Successfully saved all items.");
+// });
+
+
 
 app.get("/", function(req, res) {
   // res.sendFile(__dirname+"/public/res/mydp.jpg");
@@ -28,25 +59,11 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res) {
   var userId = req.body.userId;
-  console.log(userId);
-  url = "https://codeforces.com/api/user.rating?handle=" + userId;
-  https.get(url, function(resHttps) {
-    resHttps.on("data", function(data) {
-      const ratingData = JSON.parse(data);
-      if (ratingData.status == "FAILED")
-        res.write("Invalid User");
-      else {
-        var totalContest = ratingData.result.length;
-        var rating = 0;
-        if (totalContest != 0)
-          rating = ratingData.result[totalContest - 1].newRating;
-
-        console.log(rating);
-        res.write("<h1>" + rating + "</h1>");
-      }
-      res.send();
-    });
+  codeforces.getRating(userId, function(rating){
+    res.write("<h1>" + rating + "</h1>");
+    res.send();
   });
+
 });
 
 app.get("/about", function(req, res) {
