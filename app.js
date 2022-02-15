@@ -50,7 +50,7 @@ const skittle = new Item({
 
 app.get("/", function(req, res) {
   // res.sendFile(__dirname+"/public/res/mydp.jpg");
-  res.render("index", {
+  res.render("home", {
     activeHome: "active",
     activeAbout: "",
     activeContact: ""
@@ -59,9 +59,13 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res) {
   var userId = req.body.userId;
-  codeforces.getRating(userId, function(rating){
-    res.write("<h1>" + rating + "</h1>");
-    res.send();
+  codeforces.getRating(userId, function(rating) {
+    res.render("post", {
+      activeHome: "active",
+      activeAbout: "",
+      activeContact: "",
+      rating: rating
+    });
   });
 
 });
