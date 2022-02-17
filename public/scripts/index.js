@@ -42,6 +42,7 @@ $(".display-image").on("click", function() {
   }
 });
 
+
 function calculateHeight(imageClass) {
   // calculate final height after the first animation
   totalHeight = parseFloat($(imageClass).css("width"));

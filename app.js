@@ -14,8 +14,9 @@ app.use(bodyparser.urlencoded({
   extended: true
 }));
 
+const uri = "mongodb+srv://cubenbits:9LYgZzVNGWrQv6j@cluster0.rde6e.mongodb.net/";
 
-mongoose.connect("mongodb://localhost:27017/myDB", {
+mongoose.connect(uri+"myDB", {
   useNewUrlParser: true
 });
 
