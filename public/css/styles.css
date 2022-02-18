@@ -32,9 +32,19 @@ label {
 
 .background {
   display: block;
+  position: absolute;
   background-color: #222;
   border-radius: 4px;
-  height: 1600px;
+  color: #f1f1f1;
+  /* height: 1600px; */
+}
+
+.background2 {
+  display: block;
+  /* position: absolute; */
+  background-color: #222;
+  border-radius: 4px;
+  margin: 10px 0 10px;
 }
 
 .display-image {
@@ -51,6 +61,44 @@ label {
   box-shadow: 5px 5px 10px black;
 }
 
+/* ------------------------------------------------------------------------ */
+.box {
+  max-width: 400px;
+  margin: 50px auto 50px;
+  background: #ddd;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+.character-box {
+  /* margin: 2% auto 2%; */
+  /* background: #eee; */
+  /* border-radius: 5px; */
+  /* box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3); */
+}
+
+.character-row {
+  min-height: 200px;
+  width: 70%;
+  margin: 5% auto;
+  text-align: left;
+}
+
+.left-img {
+  width: 20%;
+  border-radius: 100%;
+  float: left;
+  margin: 10px 20px 10px 10px;
+}
+
+.right-img {
+  width: 20%;
+  border-radius: 100%;
+  float: right;
+  margin: 10px 10px 10px 20px;
+}
+
+/* ------------------------------------------------------------------------ */
 .footer {
   background-color: #222;
   border-radius: 4px;

@@ -16,71 +16,115 @@ app.use(bodyparser.urlencoded({
 
 const uri = "mongodb+srv://cubenbits:9LYgZzVNGWrQv6j@cluster0.rde6e.mongodb.net/";
 
-mongoose.connect(uri+"myDB", {
+mongoose.connect(uri + "myDB", {
   useNewUrlParser: true
 });
 
-const itemsSchema = {
-  name: String
+const characterSchema = {
+  name: String,
+  type: String,
+  description: String,
+  age: Number,
+  imageUrl: String
 }
-const Item = mongoose.model("Item", itemsSchema);
+const Character = mongoose.model("Character", characterSchema);
 
-const beluga = new Item({
-  name: "Beluga"
+const beluga = new Character({
+  name: "Beluga",
+  type: "Cat",
+  description: "Beluga lives in Honolulu, Hawaii. He is most likely 19 years old. His bedtime is always at 7pm, even though his school days are always random, and always start at random times of day. While he is human, he turns into a polite cat in the middle of the night.",
+  age: 19,
+  imageUrl: "https://static.wikia.nocookie.net/beluga/images/9/99/Beluga_d.png"
 })
-const hecker = new Item({
-  name: "Hecker"
+const hecker = new Character({
+  name: "Hecker",
+  type: "Cat",
+  description: "Hecker is a good friend to Beluga and is always there to help him. He is one of the most if not the most powerful cat. Hecker always finds your password. He also has his own hiring website where people can hire him for his hecking services.",
+  age: 40,
+  imageUrl: "https://static.wikia.nocookie.net/beluga/images/9/9c/Hecker.jpg"
 })
-const skittle = new Item({
-  name: "Skittle"
+const skittle = new Character({
+  name: "Skittle",
+  type: "Dog",
+  description: "Skittle is an astronaut Shiba Inu.  He is a friend of Beluga. He normally hangs out with Beluga and helps him in some way.",
+  age: 22,
+  imageUrl: "https://static.wikia.nocookie.net/beluga/images/f/f6/Skittle.jpg"
 })
 
-// Item.insertMany([beluga, hecker, skittle], function(err){
+var characterList = [beluga, hecker, skittle];
+
+// Character.insertMany(characterList, function(err){
 //   if (err) console.log(err);
 //   else console.log("Successfully saved all items.");
 // });
 
+const appList = [{
+  name: "CF Profile",
+  kebab: "cf-profile",
+}];
 
 
-app.get("/", function(req, res) {
-  // res.sendFile(__dirname+"/public/res/mydp.jpg");
-  res.render("home", {
-    activeHome: "active",
-    activeAbout: "",
-    activeContact: ""
+app.route("/")
+  .get(function(req, res) {
+    Character.find(function(err, characterList) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("home", {
+          activeClass: "home",
+          appList: appList,
+          characterList: characterList
+        });
+      }
+    });
+  })
+  .post(function(req, res) {
+    var userId = req.body.userId;
+    codeforces.getRating(userId, function(rating) {
+      res.render("post", {
+        rating: rating,
+        appList: appList,
+        activeClass: "home",
+      });
+    });
+  });
+
+app.route("/about")
+  .get(function(req, res) {
+    textGenerator.getText(function(generatedText) {
+      res.render("about", {
+        activeClass: "about",
+        appList: appList,
+        content: generatedText
+      });
+    });
+  });
+
+app.route("/contact")
+  .get(function(req, res) {
+    textGenerator.getText(function(generatedText) {
+      res.render("contact", {
+        activeClass: "contact",
+        appList: appList,
+        content: generatedText
+      });
+    });
+  });
+
+app.get("/more/:appName", function(req, res) {
+  res.render(req.params.appName, {
+    activeClass: "more",
+    appList: appList
   });
 });
 
-app.post("/", function(req, res) {
+app.post("/more/cf-rating", function(req, res) {
   var userId = req.body.userId;
   codeforces.getRating(userId, function(rating) {
     res.render("post", {
-      activeHome: "active",
-      activeAbout: "",
-      activeContact: "",
-      rating: rating
-    });
-  });
-});
-
-app.get("/about", function(req, res) {
-  textGenerator.getText(function(generatedText) {
-    res.render("about", {
-      activeHome: "",
-      activeAbout: "active",
-      activeContact: "",
-      aboutContent: generatedText
-    });
-  });
-});
-
-app.get("/contact", function(req, res) {
-  textGenerator.getText(function(generatedText) {
-    res.render("contact", {
-      activeHome: "",
-      activeAbout: "",
-      activeContact: "active",
-      contactContent: generatedText
+      rating: rating,
+      appList: appList,
+      activeClass: "more",
     });
   });
 });
