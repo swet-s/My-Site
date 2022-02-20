@@ -32,7 +32,7 @@ label {
 
 .background {
   display: block;
-  position: absolute;
+  /* position: absolute; */
   background-color: #222;
   border-radius: 4px;
   color: #f1f1f1;
@@ -80,7 +80,8 @@ label {
 .character-row {
   min-height: 200px;
   width: 70%;
-  margin: 5% auto;
+  padding: 10% auto;
+  margin: 0 auto;
   text-align: left;
 }
 
