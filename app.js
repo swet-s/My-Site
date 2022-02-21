@@ -15,11 +15,7 @@ app.use(bodyparser.urlencoded({
   extended: true
 }));
 
-<<<<<<< HEAD
 const uri = "mongodb+srv://cubenbits:"+process.env.API_KEY+"@cluster0.rde6e.mongodb.net/";
-=======
-const uri = "mongodb+srv://cubenbits:Ol9BcuqnlsBHZsLe@cluster0.rde6e.mongodb.net/";
->>>>>>> 2524ba2e09d66e2cb5c84506d613a7aa9b192834
 
 mongoose.connect(uri + "myDB", {
   useNewUrlParser: true
