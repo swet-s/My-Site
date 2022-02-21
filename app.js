@@ -14,7 +14,7 @@ app.use(bodyparser.urlencoded({
   extended: true
 }));
 
-const uri = "mongodb+srv://cubenbits:9LYgZzVNGWrQv6j@cluster0.rde6e.mongodb.net/";
+const uri = "mongodb+srv://cubenbits:Ol9BcuqnlsBHZsLe@cluster0.rde6e.mongodb.net/";
 
 mongoose.connect(uri + "myDB", {
   useNewUrlParser: true
@@ -29,29 +29,15 @@ const characterSchema = {
 }
 const Character = mongoose.model("Character", characterSchema);
 
-const beluga = new Character({
-  name: "Beluga",
-  type: "Cat",
-  description: "Beluga lives in Honolulu, Hawaii. He is most likely 19 years old. His bedtime is always at 7pm, even though his school days are always random, and always start at random times of day. While he is human, he turns into a polite cat in the middle of the night.",
-  age: 19,
-  imageUrl: "https://static.wikia.nocookie.net/beluga/images/9/99/Beluga_d.png"
-})
-const hecker = new Character({
-  name: "Hecker",
-  type: "Cat",
-  description: "Hecker is a good friend to Beluga and is always there to help him. He is one of the most if not the most powerful cat. Hecker always finds your password. He also has his own hiring website where people can hire him for his hecking services.",
-  age: 40,
-  imageUrl: "https://static.wikia.nocookie.net/beluga/images/9/9c/Hecker.jpg"
-})
-const skittle = new Character({
-  name: "Skittle",
-  type: "Dog",
-  description: "Skittle is an astronaut Shiba Inu.  He is a friend of Beluga. He normally hangs out with Beluga and helps him in some way.",
-  age: 22,
-  imageUrl: "https://static.wikia.nocookie.net/beluga/images/f/f6/Skittle.jpg"
+const skittleChan = new Character({
+  name: "skittle-chan",
+  type: "Anime Girl",
+  description: "skittle-chan has a crush on Beluga and is seen to be close friends with him in many videos. She is always kind to Beluga and sometimes even does whatever he says. She even went as far as almost marrying him, but she messed up his keyboard, causing Beluga to accidentally type that he had a girlfriend, this makes skittle-chan go offline due to deep sadness. This shows how much she loves Beluga. skittle-chan acts shy around all boys unless she is angry.",
+  age: 23,
+  imageUrl: "https://static.wikia.nocookie.net/beluga/images/b/bf/Skittle-Chan-HIGH-QUALITY.png"
 })
 
-var characterList = [beluga, hecker, skittle];
+var characterList = [skittleChan];
 
 // Character.insertMany(characterList, function(err){
 //   if (err) console.log(err);
