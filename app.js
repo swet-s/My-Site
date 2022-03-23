@@ -4,9 +4,13 @@ const bodyparser = require("body-parser");
 const request = require("request");
 const mongoose = require("mongoose");
 const https = require("https");
+const bcrypt = require("bcrypt");
 
 const codeforces = require(__dirname + "/public/scripts/codeforces.js")
 const textGenerator = require(__dirname + "/public/scripts/loremGen.js")
+
+
+const dbModel = require(__dirname + "/dbModel.js")
 
 const app = express();
 app.set("view engine", "ejs");
@@ -15,28 +19,35 @@ app.use(bodyparser.urlencoded({
   extended: true
 }));
 
-const uri = "mongodb+srv://cubenbits:"+process.env.API_KEY+"@cluster0.rde6e.mongodb.net/";
+const port = process.env.PORT || 8001;
+
+
+// middleware
+// app.use(express.json());
+
+
+const saltRounds = 10;
+bcrypt.hash("Hashing Completed", saltRounds, function(err, hash) {
+  console.log(hash);
+  bcrypt.compare("Hashing Completed", hash, function(err, result) {
+    console.log(result);
+  });
+});
+
+
+const uri = "mongodb+srv://cubenbits:" + process.env.API_KEY + "@cluster0.rde6e.mongodb.net/";
 
 mongoose.connect(uri + "myDB", {
   useNewUrlParser: true
 });
 
-const characterSchema = {
-  name: String,
-  type: String,
-  description: String,
-  age: Number,
-  imageUrl: String
-}
-const Character = mongoose.model("Character", characterSchema);
-
-const skittleChan = new Character({
+const skittleChan = new dbModel.Character({
   name: "skittle-chan",
   type: "Anime Girl",
   description: "skittle-chan has a crush on Beluga and is seen to be close friends with him in many videos. She is always kind to Beluga and sometimes even does whatever he says. She even went as far as almost marrying him, but she messed up his keyboard, causing Beluga to accidentally type that he had a girlfriend, this makes skittle-chan go offline due to deep sadness. This shows how much she loves Beluga. skittle-chan acts shy around all boys unless she is angry.",
   age: 23,
   imageUrl: "https://static.wikia.nocookie.net/beluga/images/b/bf/Skittle-Chan-HIGH-QUALITY.png"
-})
+});
 
 var characterList = [skittleChan];
 
@@ -52,8 +63,8 @@ const appList = [{
 
 
 app.route("/")
-  .get(function(req, res) {
-    Character.find(function(err, characterList) {
+  .get((req, res) => {
+    dbModel.Character.find(function(err, characterList) {
       if (err) {
         console.log(err);
       } else {
@@ -98,6 +109,18 @@ app.route("/contact")
     });
   });
 
+
+app.route("/signup")
+  .get(function(req, res) {
+    textGenerator.getText(function(generatedText) {
+      res.render("signup", {
+        activeClass: "contact",
+        appList: appList,
+        content: generatedText
+      });
+    });
+  });
+
 app.get("/more/:appName", function(req, res) {
   res.render(req.params.appName, {
     activeClass: "more",
@@ -116,8 +139,8 @@ app.post("/more/cf-rating", function(req, res) {
   });
 });
 
-app.listen(process.env.PORT || 3000, function() {
-  console.log("Server started on port 3000");
+app.listen(port, ()=> {
+  console.log(`Server started on port ${port}`);
 });
 
 // API Key
