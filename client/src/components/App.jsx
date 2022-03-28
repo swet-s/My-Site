@@ -21,30 +21,7 @@ function App() {
       setCharacters(res.data);
     });
   };
-
-  // const updateEmployeeWage = (id) => {
-  //   Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
-  //     (response) => {
-  //       setEmployeeList(
-  //         employeeList.map((val) => {
-  //           return val.id === id
-  //             ? {
-  //                 id: val.id,
-  //                 name: val.name,
-  //                 country: val.country,
-  //                 age: val.age,
-  //                 position: val.position,
-  //                 wage: newWage,
-  //               }
-  //             : val;
-  //         })
-  //       );
-  //     }
-  //   );
-  // };
-  //
-
-
+  
   const deleteCharacter = (id) => {
     axios.delete(`http://localhost:3001/delete/${id}`).then( res => {
       getCharacter();
