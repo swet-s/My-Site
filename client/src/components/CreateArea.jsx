@@ -3,9 +3,9 @@ import React, { useState } from "react";
 function CreateArea(props) {
   const [character, setCharacter] = useState({
     name: "",
-    age: "",
     description: "",
-    imageUrl: ""
+    imageUrl: "",
+    website: ""
   });
 
   function handleChange(event) {
@@ -23,9 +23,9 @@ function CreateArea(props) {
     props.onAdd(character);
     setCharacter({
       name: "",
-      age: "",
       description: "",
-      imageUrl: ""
+      imageUrl: "",
+      website: ""
     });
     event.preventDefault();
   }
@@ -37,27 +37,27 @@ function CreateArea(props) {
           name="name"
           onChange={handleChange}
           value={character.name}
-          placeholder="Character Name"
-        />
-        <input style={cstyleInput}
-          name="age"
-          onChange={handleChange}
-          value={character.age}
-          placeholder="Character Age"
+          placeholder="name"
         />
         <textarea style={cstyleInput}
           name="description"
           onChange={handleChange}
           value={character.description}
-          placeholder="Short description of your character..."
+          placeholder="your description here..."
           rows="3"
         />
-        <textarea style={cstyleInput}
+        <input style={cstyleInput}
+          name="website"
+          onChange={handleChange}
+          value={character.website}
+          placeholder="paste your website link here"
+        />
+
+        <input style={cstyleInput}
           name="imageUrl"
           onChange={handleChange}
           value={character.imageUrl}
-          placeholder="Paste image Url of your character here."
-          rows="2"
+          placeholder="paste your image url here"
         />
         <button style={cstyleAdd} onClick={submitCharacter}>+</button>
       </form>
@@ -89,8 +89,8 @@ const cstyleInput = {
 
 const cstyleAdd = {
   position: 'absolute',
-  right: '18px',
-  bottom: '-18px',
+  right: '10px',
+  bottom: '10px',
   background: '#eee',
   color: '#222',
   fontSize: '1.8em',

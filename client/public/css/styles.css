@@ -8,9 +8,9 @@ body {
 }
 
 header {
-  background-color: #101010;
+  background-color: #222;
   margin: auto 0;
-  padding: 5px 20px;
+  padding: 5px 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   border-radius: 5px;
 }
@@ -32,40 +32,6 @@ footer {
 
 footer p {
   color: #ccc;
-}
-
-.note {
-  background: #fff;
-  border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 10px;
-  width: 240px;
-  margin: 16px;
-  float: left;
-}
-
-.note h1 {
-  font-size: 1.1em;
-  margin-bottom: 6px;
-}
-
-.note p {
-  font-size: 1.1em;
-  margin-bottom: 10px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-.note button {
-  position: relative;
-  float: right;
-  margin-right: 10px;
-  color: #eee;
-  border: none;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  outline: none;
 }
 
 h1 {
@@ -92,12 +58,12 @@ label {
 }
 
 .background {
-  display: block;
+  display: flex;
   /* position: absolute; */
   background-color: #222;
   border-radius: 4px;
-  color: #f1f1f1;
-  /* height: 1600px; */
+  margin-bottom: 45px;
+  flex-direction: column;
 }
 
 .background2 {
@@ -120,54 +86,6 @@ label {
 .selected-image {
   position: static;
   box-shadow: 5px 5px 10px black;
-}
-
-/* ------------------------------------------------------------------------ */
-.box {
-  max-width: 400px;
-  margin: 50px auto 50px;
-  background: #ddd;
-  border-radius: 5px;
-  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
-}
-
-.character-box {
-  /* margin: 2% auto 2%; */
-  /* background: #eee; */
-  /* border-radius: 5px; */
-  /* box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3); */
-}
-
-.character-row {
-  min-height: 200px;
-  width: 70%;
-  padding: 10% auto;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.left-img {
-  width: 20%;
-  border-radius: 100%;
-  float: left;
-  margin: 10px 20px 10px 10px;
-}
-
-.right-img {
-  width: 20%;
-  border-radius: 100%;
-  float: right;
-  margin: 10px 10px 10px 20px;
-}
-
-/* ------------------------------------------------------------------------ */
-.footer {
-  background-color: #222;
-  border-radius: 4px;
-  color: white;
-  padding-top: 15px;
-  padding-bottom: 5px;
-  text-transform: uppercase;
 }
 
 .paragraph {

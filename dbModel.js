@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const characterSchema = new Schema({
   name: String,
   description: String,
-  age: Number,
-  imageUrl: String
+  imageUrl: String,
+  website: String
 });
 
-exports.Character = mongoose.model("Character", characterSchema);
+module.exports = mongoose.model("Character", characterSchema);

@@ -17,11 +17,10 @@ function App() {
 
   const getCharacter = () => {
     axios.get("http://localhost:3001/").then(res => {
-      // console.log(characters);
       setCharacters(res.data);
     });
   };
-  
+
   const deleteCharacter = (id) => {
     axios.delete(`http://localhost:3001/delete/${id}`).then( res => {
       getCharacter();
@@ -31,25 +30,29 @@ function App() {
     });
   };
 
+  getCharacter();
   return (
     <div>
       <Header />
-      {getCharacter()}
       <CreateArea onAdd = {addCharacter} />
 
-      {characters.map((characterItem, index) => {
-          return (
-            <Character
-            key = {index}
-            id = {characterItem._id}
-            name = {characterItem.name}
-            description = {characterItem.description}
-            age = {characterItem.age}
-            imageUrl = {characterItem.imageUrl}
-            onDelete = {deleteCharacter}
-            />
-          );
-        })}
+      <div className="background">
+        {characters.map((characterItem, index) => {
+            return (
+              <Character
+              key = {index}
+              index = {index}
+              id = {characterItem._id}
+              name = {characterItem.name}
+              description = {characterItem.description}
+              imageUrl = {characterItem.imageUrl}
+              website = {characterItem.website}
+              onDelete = {deleteCharacter}
+              />
+            );
+          })}
+      </div>
+
       <Footer />
     </div>
 );
