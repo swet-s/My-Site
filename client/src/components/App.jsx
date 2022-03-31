@@ -8,21 +8,23 @@ import CreateArea from "./CreateArea";
 function App() {
   const [characters, setCharacters] = useState([]);
 
+  const url = "https://agile-temple-60244.herokuapp.com/";
+  
   const addCharacter = (newCharacter) => {
-    axios.post("http://localhost:3001/create", newCharacter).then(res => {
+    axios.post(url+"create", newCharacter).then(res => {
       getCharacter();
       console.log("Successfully Added");
     });
   };
 
   const getCharacter = () => {
-    axios.get("http://localhost:3001/").then(res => {
+    axios.get(url).then(res => {
       setCharacters(res.data);
     });
   };
 
   const deleteCharacter = (id) => {
-    axios.delete(`http://localhost:3001/delete/${id}`).then( res => {
+    axios.delete(url+`delete/${id}`).then( res => {
       getCharacter();
       // setCharacters(characters.filter((characterItem, index) => {
       // return characterItem._id !== id;

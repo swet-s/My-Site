@@ -4,7 +4,7 @@ import DisplayPic from "./DisplayPic";
 function Header() {
   return (
     <header>
-      <h1>My App and Files</h1>
+      <h1>My Notes</h1>
       <DisplayPic />
     </header>
   );

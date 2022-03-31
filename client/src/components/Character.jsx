@@ -1,4 +1,5 @@
 import React from "react";
+import InsertLinkIcon from '@mui/icons-material/InsertLink';
 
 function Character(props) {
 
@@ -9,7 +10,7 @@ function Character(props) {
   return (
     <div style={cstyleCharacter} className="character">
 
-      <a style={cstyleA} href={props.website} target="_blank">⤴</a>
+      <a style={cstyleA} href={props.website} target="_blank"><InsertLinkIcon /></a>
 
       <button style={cstyleButton} onClick={handleClick}>×</button>
       <h1 style={cstyleH1}>{props.name}</h1>
@@ -75,6 +76,7 @@ const cstyleA = {
   fontSize: '1.5em',
   textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
   textAlign: 'center',
+  fontFamily: '"Merriweather", serif',
   textDecoration: 'none',
   border: 'none',
   borderRadius: '25%',
